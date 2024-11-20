@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../../Documents/LEARNER CODES/VISIBLE PROJECTS/learning/fontawesome-free-6.1.1-web/css/all.css">
+    <script defer src="script.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+    body{
+        min-height: 100vh;
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        /* place-content: center; */
+        background: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)), url(whitepaper9.jpg);
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        /* padding-bottom: 50px; */
+    }
+    main{
+        margin-inline: 15px;
+        padding: 20px;
+    }
+    .container{
+        max-width: 650px;
+        margin: auto;
+        margin-top: 70px;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 10px;
+        color: aliceblue;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) ;
+    }
+    #todoForm{
+        display: flex;
+        gap: 5px;
+    }
+    /* #input:after{
+        content: "Put a Task";
+        display: block;
+        width: 100px;
+        height: 100px;
+    } */
+    #input.active{
+        /* display: block; */
+        animation-name:errorMessage ;
+        animation-duration: .3s;
+        animation-timing-function: linear;
+    }
+    @keyframes errorMessage {
+        0%{
+            transform: skew(20deg,1deg)
+        }        
+        25%{
+            transform: skew(-20deg,-1deg)
+        }
+        50%{
+            transform: skew(20deg,1deg)
+        }        
+        75%{
+            transform: skew(-20deg,-1deg)
+        }
+        100%{
+            transform: skew(20deg,1deg)
+        }
+    }
+    #input{
+        flex: 1;
+        border-radius: 5px 0 0 5px;
+        padding: 5px 8px;
+    }
+    #input, #save{
+        outline: none;
+        border: none;
+    }
+    #save{
+        font-weight: bold;
+        border-radius: 0px 5px 5px 0px;
+        padding: 5px 20px;
+        background-color: rgba(255, 0, 0, 0.74);
+        cursor: pointer;
+    }
+    #save:hover{
+        background-color: red;
+        color: aliceblue;
+    }
+    h2{
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    section ul{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        min-height: 100px;
+    }
+    li span{
+        text-overflow: ellipsis;
+        /* word-break: break-all; */
+        overflow: hidden;
+    }
+    li{
+        list-style-type: none;
+        border-radius: 7px 7px 0 0 ;
+        background:linear-gradient(rgba(185, 170, 170, 0.6),rgba(185, 170, 170, 0.6));
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: bold;
+        gap: 10px;
+        border-left: 3px solid transparent;
+        color: rgb(176, 180, 185);
+    }
+    li:hover{
+        background:linear-gradient(rgb(172, 165, 165),rgb(151, 142, 142));
+        color: rgb(255, 255, 255);
+        border-left: 3px solid white;
+    }
+    li div{
+        display: flex;
+        gap: 20px;
+    }
+    li div button{
+        background: none;
+        outline: 0;
+        border: 0;
+    }
+    li div .fa{
+        cursor: pointer;
+        font-size: 1.1rem;
+        opacity: 1;
+        /* transition: .4s; */
+    }
+    li div .fa:hover{
+        color: red;
+    }
+    .baseBtn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    .baseBtn button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex: 1 0 20%;
+        padding: 10px 0;
+        outline: 0;
+        border: 0;
+        border-radius: 8px 0 0 8px;
+        cursor: pointer;
+    }
+    .baseBtn button:hover{
+        background-color: red;
+        color: aliceblue;
+    }
+    .showBtn{
+        border-radius: 0 8px 8px 0;
+    }
+    .fa-caret-down{
+        display: none;
+    }
+    .baseBtn .hideBtn{
+        border-radius:0;
+    }
+    .showBtn.active, .hideBtn.active, .clearBtn.active{
+        background-color: red;
+        color: white;
+    }
+    .baseBtn .disapperBtn{
+        display: none;
+    }
+    ul.hide{
+        visibility: hidden;
+        transition: .4s;
+    }
+    .alert{
+       width: 40%;
+        border: 2px solid transparent;
+        margin: auto;
+        text-align: center;
+        position: fixed;
+        top: -10%;
+        right: 50%;    
+        transform: translateX(50%);    
+        padding: 3px;
+        /* transform: scale(0,0); */
+        transition: .7s;
+        z-index: 101;
+    }
+    .alert-danger{
+        top: 15px;
+        border: 2px solid rgb(108, 10, 10);
+        background-color: rgb(255, 0, 0,0.3) ;
+        /* transform: scale(1,1); */
+    }
+    .alert-sucess{
+        border: 2px solid rgb(10, 108, 10);
+        background-color: rgb(0, 255, 0,0.3);
+        top: 15px;
+    }
+    @media screen and (max-width:700px) {
+        main{
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            padding-inline: 10px;
+            height: 100vh;
+            margin: 0%;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            margin-bottom: 40px;
+        }
+        div.container{
+            margin: 0;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .alert{
+            width: 70%;
+        }
+    }
+    @media screen and (max-width:400px) {
+        .alert{
+            width: 90%;
+        }
+        #todoForm{
+            flex-direction: column;
+        }
+        section ul{
+            padding: 20px 10px;
+        }
+    }
+    @media screen and (max-width:300px) {
+        .baseBtn button {
+            position: relative;
+            
+        }
+        .baseBtn button span{
+            display: none;
+        }
+        .baseBtn button:hover span{
+            display: block;
+            position: absolute;
+            background-color: black;
+            width: fit-content;
+            padding: 7px;
+            top: -130%;
+            border-radius: 10px;
+            color: aliceblue;
+            z-index: 99;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.158);
+        }
+        .fa-caret-down{        
+            display: block;
+            width: fit-content;
+            position: absolute;
+            right: 50%;
+            transform: translateX(50%);
+            font-size: 1.3rem;
+            bottom: -40%;
+            color: black;
+            z-index: 0;
+            /* box-shadow: 0 0 10px white; */
+        }
+        h2{
+            font-size: 1.2rem;
+        }
+    }
+    #clear{
+        position: absolute;
+        top: 0;
+        color: aliceblue;
+        background-color: red;
+        font-size: .6rem;
+        border: none;
+        outline: none;
+        border-radius: 50%;
+        text-align: center;
+    }
+    </style>
+<body>
+    <audio src="goodresult-82807.mp3" ></audio>
+    <audio src="eas-end-tone-255447.mp3" ></audio>
+    <article class=" alert ">
+        This is an alert message
+    </article>
+    <main>
+        <div class="container">
+            <h2><span style="color: red;">LEARNER'S</span> TO-DO LIST</h2>
+            <form action="" id="todoForm">
+                <input type="text" id="input" name="input">
+                <input type="submit" value="Save" id="save">
+            </form>
+            <section>
+                <ul >
+                    <!-- <li>Reading 
+                        <div class="bottonContainer">
+                            <button class="editBtn" type="button"><i class="fa fa-edit"></i></button>
+                            <button class="deleteBtn" type="button"><i class="fa fa-trash"></i></button>
+                            <button class="deleteBtn" type="button"><i class="fa fa-trash"></i></button>
+                        </div>
+                    <!-/- </li> --> 
+                    <!-- <li>Cooking 
+                        <div class="bottonContainer">
+                            <button class="editBtn" type="button"><i class="fa fa-edit"></i></button>
+                            <button class="deleteBtn" type="button"><i class="fa fa-trash"></i></button>
+                            <button class="deleteBtn" type="button"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </li>
+                    <li>Sleeping 
+                        <div class="bottonContainer">
+                            <button class="editBtn" type="button"><i class="fa fa-edit"></i></button>
+                            <button class="deleteBtn" type="button"><i class="fa fa-trash"></i></button>
+                            <button class="deleteBtn" type="button"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </li> -->
+                </ul>
+                <article class="baseBtn">
+                    <button class="clearBtn" type="button"> <span>Clear Items <i class="fa fa-caret-down"></i></span><i class="fa fa-trash"></i></button>
+                    <button class="hideBtn" type="button"> <span>Hide Items<i class="fa fa-caret-down"></i></span><i class="fa fa-eye-slash"></i> </button>
+                    <button class="showBtn disapperBtn" type="button"> <span>Show Items<i class="fa fa-caret-down"></i></span><i class="fa fa-eye"></i></button>
+                </article>
+            </section>
+            
+        </div>
+    </main>
+    <input type="button" value="1" id="clear">
+</body>
+</html>
