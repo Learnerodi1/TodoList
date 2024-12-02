@@ -22,9 +22,11 @@ function Alert_message(msg, msgType) {
         input.classList.remove("active")
     }, 2000)
     if(msgType == "sucess"){
+        audio1.currentTime = 0
         audio1.play()
     }
     else{
+        audio2.currentTime = 0
         audio2.play()
     }
 }
